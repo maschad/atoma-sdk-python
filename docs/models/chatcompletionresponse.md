@@ -1,0 +1,13 @@
+# ChatCompletionResponse
+
+
+## Fields
+
+| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `choices`                                                                | List[[models.ChatCompletionChoice](../models/chatcompletionchoice.md)]   | :heavy_check_mark:                                                       | A list of chat completion choices.                                       |
+| `created`                                                                | *int*                                                                    | :heavy_check_mark:                                                       | The Unix timestamp (in seconds) of when the chat completion was created. |
+| `id`                                                                     | *str*                                                                    | :heavy_check_mark:                                                       | A unique identifier for the chat completion.                             |
+| `model`                                                                  | *str*                                                                    | :heavy_check_mark:                                                       | The model used for the chat completion.                                  |
+| `system_fingerprint`                                                     | *OptionalNullable[str]*                                                  | :heavy_minus_sign:                                                       | The system fingerprint for the completion, if applicable.                |
+| `usage`                                                                  | [OptionalNullable[models.CompletionUsage]](../models/completionusage.md) | :heavy_minus_sign:                                                       | N/A                                                                      |
