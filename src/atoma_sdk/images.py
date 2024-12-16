@@ -7,8 +7,8 @@ from atoma_sdk.types import OptionalNullable, UNSET
 from typing import Mapping, Optional
 
 
-class ImageGenerations(BaseSDK):
-    r"""OpenAI's API image generations v1 endpoint"""
+class Images(BaseSDK):
+    r"""OpenAI's API images v1 endpoint"""
 
     def image_generations_handler(
         self,

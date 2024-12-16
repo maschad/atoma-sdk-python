@@ -7,10 +7,10 @@ from .utils.logger import Logger, get_default_logger
 from .utils.retries import RetryConfig
 from atoma_sdk import utils
 from atoma_sdk._hooks import SDKHooks
-from atoma_sdk.chat_completions import ChatCompletions
+from atoma_sdk.chat import Chat
 from atoma_sdk.embeddings import Embeddings
 from atoma_sdk.health import Health
-from atoma_sdk.image_generations import ImageGenerations
+from atoma_sdk.images import Images
 from atoma_sdk.models_ import Models
 from atoma_sdk.node_public_address_registration import NodePublicAddressRegistration
 from atoma_sdk.types import OptionalNullable, UNSET
@@ -23,14 +23,14 @@ class AtomaSDK(BaseSDK):
     r"""Health check"""
     node_public_address_registration: NodePublicAddressRegistration
     r"""Node public address registration"""
-    chat_completions: ChatCompletions
-    r"""Chat completions"""
+    chat: Chat
+    r"""OpenAI's API chat completions v1 endpoint"""
     embeddings: Embeddings
     r"""OpenAI's API embeddings v1 endpoint"""
-    image_generations: ImageGenerations
-    r"""OpenAI's API image generations v1 endpoint"""
+    images: Images
+    r"""OpenAI's API images v1 endpoint"""
     models: Models
-    r"""Models"""
+    r"""OpenAI's API models v1 endpoint"""
 
     def __init__(
         self,
@@ -106,9 +106,9 @@ class AtomaSDK(BaseSDK):
         self.node_public_address_registration = NodePublicAddressRegistration(
             self.sdk_configuration
         )
-        self.chat_completions = ChatCompletions(self.sdk_configuration)
+        self.chat = Chat(self.sdk_configuration)
         self.embeddings = Embeddings(self.sdk_configuration)
-        self.image_generations = ImageGenerations(self.sdk_configuration)
+        self.images = Images(self.sdk_configuration)
         self.models = Models(self.sdk_configuration)
 
     def __enter__(self):

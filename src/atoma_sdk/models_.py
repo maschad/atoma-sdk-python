@@ -8,7 +8,7 @@ from typing import Any, Mapping, Optional
 
 
 class Models(BaseSDK):
-    r"""Models"""
+    r"""OpenAI's API models v1 endpoint"""
 
     def models_handler(
         self,

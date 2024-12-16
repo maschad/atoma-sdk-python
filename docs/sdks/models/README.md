@@ -3,7 +3,7 @@
 
 ## Overview
 
-Models
+OpenAI's API models v1 endpoint
 
 ### Available Operations
 

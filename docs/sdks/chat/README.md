@@ -1,9 +1,9 @@
-# ChatCompletions
-(*chat_completions*)
+# Chat
+(*chat*)
 
 ## Overview
 
-Chat completions
+OpenAI's API chat completions v1 endpoint
 
 ### Available Operations
 
@@ -42,7 +42,7 @@ from atoma_sdk import AtomaSDK
 
 with AtomaSDK() as atoma_sdk:
 
-    res = atoma_sdk.chat_completions.chat_completions_handler(messages=[
+    res = atoma_sdk.chat.chat_completions_handler(messages=[
         {
             "content": "<value>",
             "role": "<value>",

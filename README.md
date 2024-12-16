@@ -115,9 +115,9 @@ asyncio.run(main())
 <summary>Available methods</summary>
 
 
-### [chat_completions](docs/sdks/chatcompletions/README.md)
+### [chat](docs/sdks/chat/README.md)
 
-* [chat_completions_handler](docs/sdks/chatcompletions/README.md#chat_completions_handler) - Create chat completion
+* [chat_completions_handler](docs/sdks/chat/README.md#chat_completions_handler) - Create chat completion
 
 ### [embeddings](docs/sdks/embeddings/README.md)
 
@@ -127,9 +127,9 @@ asyncio.run(main())
 
 * [health](docs/sdks/health/README.md#health) - Health
 
-### [image_generations](docs/sdks/imagegenerations/README.md)
+### [images](docs/sdks/images/README.md)
 
-* [image_generations_handler](docs/sdks/imagegenerations/README.md#image_generations_handler) - Create image generation
+* [image_generations_handler](docs/sdks/images/README.md#image_generations_handler) - Create image generation
 
 ### [models](docs/sdks/models/README.md)
 

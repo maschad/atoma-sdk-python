@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: abb58176-a92d-43ea-b418-227f4288eed7
 management:
-  docChecksum: 46e8ab189ef7a1d6089de2f18cc5c959
+  docChecksum: a1134e77f6e4eecb821dcb545cdd29cc
   docVersion: 0.1.0
   speakeasyVersion: 1.455.6
   generationVersion: 2.479.7
-  releaseVersion: 0.0.1
-  configChecksum: 12bab404b6508b6ed34519a93759c8a3
+  releaseVersion: 0.1.0
+  configChecksum: 8b06e875a245a161e660fab2be3ad756
 features:
   python:
     additionalDependencies: 1.0.0
@@ -50,10 +50,10 @@ generatedFiles:
   - docs/models/two2.md
   - docs/models/utils/retryconfig.md
   - docs/sdks/atomasdk/README.md
-  - docs/sdks/chatcompletions/README.md
+  - docs/sdks/chat/README.md
   - docs/sdks/embeddings/README.md
   - docs/sdks/health/README.md
-  - docs/sdks/imagegenerations/README.md
+  - docs/sdks/images/README.md
   - docs/sdks/models/README.md
   - docs/sdks/nodepublicaddressregistration/README.md
   - poetry.toml
@@ -68,11 +68,11 @@ generatedFiles:
   - src/atoma_sdk/_hooks/types.py
   - src/atoma_sdk/_version.py
   - src/atoma_sdk/basesdk.py
-  - src/atoma_sdk/chat_completions.py
+  - src/atoma_sdk/chat.py
   - src/atoma_sdk/embeddings.py
   - src/atoma_sdk/health.py
   - src/atoma_sdk/httpclient.py
-  - src/atoma_sdk/image_generations.py
+  - src/atoma_sdk/images.py
   - src/atoma_sdk/models/__init__.py
   - src/atoma_sdk/models/apierror.py
   - src/atoma_sdk/models/chatcompletionchoice.py

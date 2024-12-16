@@ -7,8 +7,8 @@ from atoma_sdk.types import OptionalNullable, UNSET
 from typing import Any, Dict, List, Mapping, Optional, Union
 
 
-class ChatCompletions(BaseSDK):
-    r"""Chat completions"""
+class Chat(BaseSDK):
+    r"""OpenAI's API chat completions v1 endpoint"""
 
     def chat_completions_handler(
         self,

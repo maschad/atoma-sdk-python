@@ -1,9 +1,9 @@
-# ImageGenerations
-(*image_generations*)
+# Images
+(*images*)
 
 ## Overview
 
-OpenAI's API image generations v1 endpoint
+OpenAI's API images v1 endpoint
 
 ### Available Operations
 
@@ -44,7 +44,7 @@ from atoma_sdk import AtomaSDK
 
 with AtomaSDK() as atoma_sdk:
 
-    res = atoma_sdk.image_generations.image_generations_handler(model="Accord", n=200572, prompt="<value>")
+    res = atoma_sdk.images.image_generations_handler(model="Accord", n=200572, prompt="<value>")
 
     # Handle response
     print(res)
