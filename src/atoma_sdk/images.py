@@ -10,7 +10,7 @@ from typing import Mapping, Optional
 class Images(BaseSDK):
     r"""OpenAI's API images v1 endpoint"""
 
-    def image_generations_handler(
+    def generate(
         self,
         *,
         model: str,
@@ -114,7 +114,7 @@ class Images(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="image_generations_handler",
+                operation_id="image_generations_create",
                 oauth2_scopes=[],
                 security_source=None,
             ),
@@ -140,7 +140,7 @@ class Images(BaseSDK):
             http_res,
         )
 
-    async def image_generations_handler_async(
+    async def generate_async(
         self,
         *,
         model: str,
@@ -244,7 +244,7 @@ class Images(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="image_generations_handler",
+                operation_id="image_generations_create",
                 oauth2_scopes=[],
                 security_source=None,
             ),

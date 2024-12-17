@@ -7,9 +7,9 @@ OpenAI's API images v1 endpoint
 
 ### Available Operations
 
-* [image_generations_handler](#image_generations_handler) - Create image generation
+* [generate](#generate) - Create image generation
 
-## image_generations_handler
+## generate
 
 This endpoint processes requests to generate images using AI models by forwarding them
 to the appropriate AI node. The request metadata and compute units have already been
@@ -44,7 +44,7 @@ from atoma_sdk import AtomaSDK
 
 with AtomaSDK() as atoma_sdk:
 
-    res = atoma_sdk.images.image_generations_handler(model="Accord", n=200572, prompt="<value>")
+    res = atoma_sdk.images.generate(model="Model X", n=447445, prompt="<value>")
 
     # Handle response
     print(res)

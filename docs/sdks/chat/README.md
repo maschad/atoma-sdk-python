@@ -7,9 +7,9 @@ OpenAI's API chat completions v1 endpoint
 
 ### Available Operations
 
-* [chat_completions_handler](#chat_completions_handler) - Create chat completion
+* [create](#create) - Create chat completion
 
-## chat_completions_handler
+## create
 
 This function processes chat completion requests by determining whether to use streaming
 or non-streaming response handling based on the request payload. For streaming requests,
@@ -42,20 +42,12 @@ from atoma_sdk import AtomaSDK
 
 with AtomaSDK() as atoma_sdk:
 
-    res = atoma_sdk.chat.chat_completions_handler(messages=[
+    res = atoma_sdk.chat.create(messages=[
         {
             "content": "<value>",
             "role": "<value>",
         },
-        {
-            "content": "<value>",
-            "role": "<value>",
-        },
-        {
-            "content": "<value>",
-            "role": "<value>",
-        },
-    ], model="Spyder")
+    ], model="LeBaron")
 
     # Handle response
     print(res)

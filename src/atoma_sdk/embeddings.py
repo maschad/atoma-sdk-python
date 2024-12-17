@@ -10,7 +10,7 @@ from typing import Mapping, Optional, Union, cast
 class Embeddings(BaseSDK):
     r"""OpenAI's API embeddings v1 endpoint"""
 
-    def embeddings_handler(
+    def create(
         self,
         *,
         request: Union[
@@ -89,9 +89,7 @@ class Embeddings(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="embeddings_handler",
-                oauth2_scopes=[],
-                security_source=None,
+                operation_id="embeddings_create", oauth2_scopes=[], security_source=None
             ),
             request=req,
             error_status_codes=["400", "401", "4XX", "500", "5XX"],
@@ -115,7 +113,7 @@ class Embeddings(BaseSDK):
             http_res,
         )
 
-    async def embeddings_handler_async(
+    async def create_async(
         self,
         *,
         request: Union[
@@ -194,9 +192,7 @@ class Embeddings(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="embeddings_handler",
-                oauth2_scopes=[],
-                security_source=None,
+                operation_id="embeddings_create", oauth2_scopes=[], security_source=None
             ),
             request=req,
             error_status_codes=["400", "401", "4XX", "500", "5XX"],

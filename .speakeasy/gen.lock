@@ -1,23 +1,24 @@
 lockVersion: 2.0.0
 id: abb58176-a92d-43ea-b418-227f4288eed7
 management:
-  docChecksum: a1134e77f6e4eecb821dcb545cdd29cc
+  docChecksum: 8456424107d6529b11cd62ce8dbc2f7f
   docVersion: 0.1.0
-  speakeasyVersion: 1.455.6
-  generationVersion: 2.479.7
+  speakeasyVersion: 1.455.7
+  generationVersion: 2.480.1
   releaseVersion: 0.1.0
   configChecksum: 8b06e875a245a161e660fab2be3ad756
 features:
   python:
     additionalDependencies: 1.0.0
-    core: 5.7.3
+    core: 5.7.4
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     envVarSecurityUsage: 0.3.2
     flatRequests: 1.0.1
     globalSecurityCallbacks: 1.0.0
-    globalServerURLs: 3.0.0
+    globalServerURLs: 3.1.0
     methodArguments: 1.0.2
+    nameOverrides: 3.0.0
     nullables: 1.0.0
     responseFormat: 1.0.1
     retries: 3.0.2
@@ -144,4 +145,30 @@ examples:
       responses:
         "200":
           application/json: "<value>"
+  create:
+    speakeasy-default-create:
+      requestBody:
+        application/json: {"messages": [{"content": "<value>", "role": "<value>"}], "model": "LeBaron"}
+      responses:
+        "200":
+          application/json: {"choices": [{"index": 134365, "message": {"content": "<value>", "role": "<value>"}}], "created": 69025, "id": "<id>", "model": "PT Cruiser"}
+  chat_completions_create:
+    speakeasy-default-chat-completions-create:
+      requestBody:
+        application/json: {"messages": [{"content": "<value>", "role": "<value>"}], "model": "LeBaron"}
+      responses:
+        "200":
+          application/json: {"choices": [{"index": 134365, "message": {"content": "<value>", "role": "<value>"}}], "created": 69025, "id": "<id>", "model": "PT Cruiser"}
+  embeddings_create:
+    speakeasy-default-embeddings-create:
+      responses:
+        "200":
+          application/json: {"data": [{"embedding": [], "index": 69025, "object": "<value>"}], "model": "PT Cruiser", "object": "<value>", "usage": {"prompt_tokens": 951062, "total_tokens": 86}}
+  image_generations_create:
+    speakeasy-default-image-generations-create:
+      requestBody:
+        application/json: {"model": "Model X", "n": 447445, "prompt": "<value>"}
+      responses:
+        "200":
+          application/json: {"created": 331048, "data": [{"revised_prompt": "<value>", "url": "https://enlightened-coliseum.com"}]}
 generatedTests: {}

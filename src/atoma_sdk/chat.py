@@ -10,7 +10,7 @@ from typing import Any, Dict, List, Mapping, Optional, Union
 class Chat(BaseSDK):
     r"""OpenAI's API chat completions v1 endpoint"""
 
-    def chat_completions_handler(
+    def create(
         self,
         *,
         messages: Union[
@@ -147,7 +147,7 @@ class Chat(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="chat_completions_handler",
+                operation_id="chat_completions_create",
                 oauth2_scopes=[],
                 security_source=None,
             ),
@@ -173,7 +173,7 @@ class Chat(BaseSDK):
             http_res,
         )
 
-    async def chat_completions_handler_async(
+    async def create_async(
         self,
         *,
         messages: Union[
@@ -310,7 +310,7 @@ class Chat(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="chat_completions_handler",
+                operation_id="chat_completions_create",
                 oauth2_scopes=[],
                 security_source=None,
             ),

@@ -7,9 +7,9 @@ OpenAI's API embeddings v1 endpoint
 
 ### Available Operations
 
-* [embeddings_handler](#embeddings_handler) - Create embeddings
+* [create](#create) - Create embeddings
 
-## embeddings_handler
+## create
 
 This endpoint follows the OpenAI API format for generating vector embeddings from input text.
 The handler receives pre-processed metadata from middleware and forwards the request to
@@ -38,7 +38,7 @@ from atoma_sdk import AtomaSDK
 
 with AtomaSDK() as atoma_sdk:
 
-    res = atoma_sdk.embeddings.embeddings_handler(request={})
+    res = atoma_sdk.embeddings.create(request={})
 
     # Handle response
     print(res)
