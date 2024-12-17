@@ -8,6 +8,9 @@ from .utils.retries import RetryConfig
 from atoma_sdk import utils
 from atoma_sdk._hooks import SDKHooks
 from atoma_sdk.chat import Chat
+from atoma_sdk.confidential_chat import ConfidentialChat
+from atoma_sdk.confidential_embeddings import ConfidentialEmbeddings
+from atoma_sdk.confidential_images import ConfidentialImages
 from atoma_sdk.embeddings import Embeddings
 from atoma_sdk.health import Health
 from atoma_sdk.images import Images
@@ -25,6 +28,12 @@ class AtomaSDK(BaseSDK):
     r"""Node public address registration"""
     chat: Chat
     r"""OpenAI's API chat completions v1 endpoint"""
+    confidential_chat: ConfidentialChat
+    r"""Atoma's API confidential chat completions v1 endpoint"""
+    confidential_embeddings: ConfidentialEmbeddings
+    r"""Atoma's API confidential embeddings v1 endpoint"""
+    confidential_images: ConfidentialImages
+    r"""Atoma's API confidential images v1 endpoint"""
     embeddings: Embeddings
     r"""OpenAI's API embeddings v1 endpoint"""
     images: Images
@@ -107,6 +116,9 @@ class AtomaSDK(BaseSDK):
             self.sdk_configuration
         )
         self.chat = Chat(self.sdk_configuration)
+        self.confidential_chat = ConfidentialChat(self.sdk_configuration)
+        self.confidential_embeddings = ConfidentialEmbeddings(self.sdk_configuration)
+        self.confidential_images = ConfidentialImages(self.sdk_configuration)
         self.embeddings = Embeddings(self.sdk_configuration)
         self.images = Images(self.sdk_configuration)
         self.models = Models(self.sdk_configuration)

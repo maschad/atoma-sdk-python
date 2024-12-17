@@ -1,7 +1,7 @@
 lockVersion: 2.0.0
 id: abb58176-a92d-43ea-b418-227f4288eed7
 management:
-  docChecksum: 8456424107d6529b11cd62ce8dbc2f7f
+  docChecksum: c2eb51f271a559131a99e6a65de2a900
   docVersion: 0.1.0
   speakeasyVersion: 1.455.7
   generationVersion: 2.480.1
@@ -52,6 +52,9 @@ generatedFiles:
   - docs/models/utils/retryconfig.md
   - docs/sdks/atomasdk/README.md
   - docs/sdks/chat/README.md
+  - docs/sdks/confidentialchat/README.md
+  - docs/sdks/confidentialembeddings/README.md
+  - docs/sdks/confidentialimages/README.md
   - docs/sdks/embeddings/README.md
   - docs/sdks/health/README.md
   - docs/sdks/images/README.md
@@ -70,6 +73,9 @@ generatedFiles:
   - src/atoma_sdk/_version.py
   - src/atoma_sdk/basesdk.py
   - src/atoma_sdk/chat.py
+  - src/atoma_sdk/confidential_chat.py
+  - src/atoma_sdk/confidential_embeddings.py
+  - src/atoma_sdk/confidential_images.py
   - src/atoma_sdk/embeddings.py
   - src/atoma_sdk/health.py
   - src/atoma_sdk/httpclient.py
@@ -166,6 +172,27 @@ examples:
           application/json: {"data": [{"embedding": [], "index": 69025, "object": "<value>"}], "model": "PT Cruiser", "object": "<value>", "usage": {"prompt_tokens": 951062, "total_tokens": 86}}
   image_generations_create:
     speakeasy-default-image-generations-create:
+      requestBody:
+        application/json: {"model": "Model X", "n": 447445, "prompt": "<value>"}
+      responses:
+        "200":
+          application/json: {"created": 331048, "data": [{"revised_prompt": "<value>", "url": "https://enlightened-coliseum.com"}]}
+  confidential_chat_completions_create:
+    speakeasy-default-confidential-chat-completions-create:
+      requestBody:
+        application/json: {"messages": [{"content": "<value>", "role": "<value>"}], "model": "LeBaron"}
+      responses:
+        "200":
+          application/json: {"choices": [{"index": 134365, "message": {"content": "<value>", "role": "<value>"}}], "created": 69025, "id": "<id>", "model": "PT Cruiser"}
+  confidential_embeddings_create:
+    speakeasy-default-confidential-embeddings-create:
+      requestBody:
+        application/json: "<value>"
+      responses:
+        "200":
+          application/json: {"data": [{"embedding": [], "index": 69025, "object": "<value>"}], "model": "PT Cruiser", "object": "<value>", "usage": {"prompt_tokens": 951062, "total_tokens": 86}}
+  confidential_image_generations_create:
+    speakeasy-default-confidential-image-generations-create:
       requestBody:
         application/json: {"model": "Model X", "n": 447445, "prompt": "<value>"}
       responses:

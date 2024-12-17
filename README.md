@@ -119,6 +119,18 @@ asyncio.run(main())
 
 * [create](docs/sdks/chat/README.md#create) - Create chat completion
 
+### [confidential_chat](docs/sdks/confidentialchat/README.md)
+
+* [create](docs/sdks/confidentialchat/README.md#create) - Create confidential chat completion
+
+### [confidential_embeddings](docs/sdks/confidentialembeddings/README.md)
+
+* [create](docs/sdks/confidentialembeddings/README.md#create) - Create confidential embeddings
+
+### [confidential_images](docs/sdks/confidentialimages/README.md)
+
+* [generate](docs/sdks/confidentialimages/README.md#generate) - Create confidential image generations
+
 ### [embeddings](docs/sdks/embeddings/README.md)
 
 * [create](docs/sdks/embeddings/README.md#create) - Create embeddings
