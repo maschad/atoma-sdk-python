@@ -1,0 +1,34 @@
+speakeasyVersion: 1.455.7
+sources:
+    atoma-proxy:
+        sourceNamespace: atoma-proxy
+        sourceRevisionDigest: sha256:7467b4e76e202dc2b0fdbef994fe0d555ebff233d144b9bed68679ec9f211d30
+        sourceBlobDigest: sha256:9dcb9c356395feebdb2f2ac401281a6c7b5673a8a9f6bfc8b4fd9c5895c75bfd
+        tags:
+            - latest
+            - 0.1.0
+targets:
+    atoma-sdk:
+        source: atoma-proxy
+        sourceNamespace: atoma-proxy
+        sourceRevisionDigest: sha256:7467b4e76e202dc2b0fdbef994fe0d555ebff233d144b9bed68679ec9f211d30
+        sourceBlobDigest: sha256:9dcb9c356395feebdb2f2ac401281a6c7b5673a8a9f6bfc8b4fd9c5895c75bfd
+        codeSamplesNamespace: atoma-proxy-python-code-samples
+        codeSamplesRevisionDigest: sha256:355185837f728aee2d816f35b9112aa1ec3f747cf56e009b83b691bb6f300ae6
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        atoma-proxy:
+            inputs:
+                - location: ../atoma-proxy/atoma-proxy/docs/openapi.yml
+            registry:
+                location: registry.speakeasyapi.dev/atoma-francis/atoma-proxy/atoma-proxy
+    targets:
+        atoma-sdk:
+            target: python
+            source: atoma-proxy
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/atoma-francis/atoma-proxy/atoma-proxy-python-code-samples
+                blocking: false

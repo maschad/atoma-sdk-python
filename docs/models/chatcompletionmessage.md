@@ -1,0 +1,10 @@
+# ChatCompletionMessage
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `content`                                                                                    | *str*                                                                                        | :heavy_check_mark:                                                                           | The contents of the message                                                                  |
+| `role`                                                                                       | *str*                                                                                        | :heavy_check_mark:                                                                           | The role of the message author. One of: "system", "user", "assistant", "tool", or "function" |
+| `name`                                                                                       | *OptionalNullable[str]*                                                                      | :heavy_minus_sign:                                                                           | The name of the author of this message                                                       |

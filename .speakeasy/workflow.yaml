@@ -1,0 +1,16 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    atoma-proxy:
+        inputs:
+            - location: ../atoma-proxy/atoma-proxy/docs/openapi.yml
+        registry:
+            location: registry.speakeasyapi.dev/atoma-francis/atoma-proxy/atoma-proxy
+targets:
+    atoma-sdk:
+        target: python
+        source: atoma-proxy
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/atoma-francis/atoma-proxy/atoma-proxy-python-code-samples
+            blocking: false
