@@ -27,7 +27,9 @@ Developer-friendly & type-safe Python SDK specifically catered to leverage *atom
   * [SDK Installation](#sdk-installation)
   * [IDE Support](#ide-support)
   * [SDK Example Usage](#sdk-example-usage)
+  * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
+  * [Server-sent event streaming](#server-sent-event-streaming)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
@@ -79,8 +81,11 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 ```python
 # Synchronous Example
 from atoma_sdk import AtomaSDK
+import os
 
-with AtomaSDK() as atoma_sdk:
+with AtomaSDK(
+    bearer_auth=os.getenv("ATOMASDK_BEARER_AUTH", ""),
+) as atoma_sdk:
 
     res = atoma_sdk.health.health()
 
@@ -95,9 +100,12 @@ The same SDK client can also be used to make asychronous requests by importing a
 # Asynchronous Example
 import asyncio
 from atoma_sdk import AtomaSDK
+import os
 
 async def main():
-    async with AtomaSDK() as atoma_sdk:
+    async with AtomaSDK(
+        bearer_auth=os.getenv("ATOMASDK_BEARER_AUTH", ""),
+    ) as atoma_sdk:
 
         res = await atoma_sdk.health.health_async()
 
@@ -107,6 +115,34 @@ async def main():
 asyncio.run(main())
 ```
 <!-- End SDK Example Usage [usage] -->
+
+<!-- Start Authentication [security] -->
+## Authentication
+
+### Per-Client Security Schemes
+
+This SDK supports the following security scheme globally:
+
+| Name          | Type | Scheme      | Environment Variable   |
+| ------------- | ---- | ----------- | ---------------------- |
+| `bearer_auth` | http | HTTP Bearer | `ATOMASDK_BEARER_AUTH` |
+
+To authenticate with the API the `bearer_auth` parameter must be set when initializing the SDK client instance. For example:
+```python
+from atoma_sdk import AtomaSDK
+import os
+
+with AtomaSDK(
+    bearer_auth=os.getenv("ATOMASDK_BEARER_AUTH", ""),
+) as atoma_sdk:
+
+    res = atoma_sdk.health.health()
+
+    # Handle response
+    print(res)
+
+```
+<!-- End Authentication [security] -->
 
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
@@ -118,6 +154,7 @@ asyncio.run(main())
 ### [chat](docs/sdks/chat/README.md)
 
 * [create](docs/sdks/chat/README.md#create) - Create chat completion
+* [create_stream](docs/sdks/chat/README.md#create_stream)
 
 ### [confidential_chat](docs/sdks/confidentialchat/README.md)
 
@@ -130,6 +167,10 @@ asyncio.run(main())
 ### [confidential_images](docs/sdks/confidentialimages/README.md)
 
 * [generate](docs/sdks/confidentialimages/README.md#generate) - Create confidential image generations
+
+### [confidential_node_public_key_selection](docs/sdks/confidentialnodepublickeyselection/README.md)
+
+* [select_node_public_key](docs/sdks/confidentialnodepublickeyselection/README.md#select_node_public_key) - Handles requests to select a node's public key for confidential compute operations.
 
 ### [embeddings](docs/sdks/embeddings/README.md)
 
@@ -154,6 +195,45 @@ asyncio.run(main())
 </details>
 <!-- End Available Resources and Operations [operations] -->
 
+<!-- Start Server-sent event streaming [eventstream] -->
+## Server-sent event streaming
+
+[Server-sent events][mdn-sse] are used to stream content from certain
+operations. These operations will expose the stream as [Generator][generator] that
+can be consumed using a simple `for` loop. The loop will
+terminate when the server no longer has any events to send and closes the
+underlying connection.  
+
+The stream is also a [Context Manager][context-manager] and can be used with the `with` statement and will close the
+underlying connection when the context is exited.
+
+```python
+from atoma_sdk import AtomaSDK
+import os
+
+with AtomaSDK(
+    bearer_auth=os.getenv("ATOMASDK_BEARER_AUTH", ""),
+) as atoma_sdk:
+
+    res = atoma_sdk.chat.create_stream(messages=[
+        {
+            "content": "<value>",
+            "role": "<value>",
+        },
+    ], model="Impala")
+
+    with res as event_stream:
+        for event in event_stream:
+            # handle event
+            print(event, flush=True)
+
+```
+
+[mdn-sse]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
+[generator]: https://book.pythontips.com/en/latest/generators.html
+[context-manager]: https://book.pythontips.com/en/latest/context_managers.html
+<!-- End Server-sent event streaming [eventstream] -->
+
 <!-- Start Retries [retries] -->
 ## Retries
 
@@ -163,8 +243,11 @@ To change the default retry strategy for a single API call, simply provide a `Re
 ```python
 from atoma_sdk import AtomaSDK
 from atoma_sdk.utils import BackoffStrategy, RetryConfig
+import os
 
-with AtomaSDK() as atoma_sdk:
+with AtomaSDK(
+    bearer_auth=os.getenv("ATOMASDK_BEARER_AUTH", ""),
+) as atoma_sdk:
 
     res = atoma_sdk.health.health(,
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
@@ -178,9 +261,11 @@ If you'd like to override the default retry strategy for all operations that sup
 ```python
 from atoma_sdk import AtomaSDK
 from atoma_sdk.utils import BackoffStrategy, RetryConfig
+import os
 
 with AtomaSDK(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
+    bearer_auth=os.getenv("ATOMASDK_BEARER_AUTH", ""),
 ) as atoma_sdk:
 
     res = atoma_sdk.health.health()
@@ -215,8 +300,11 @@ When custom error responses are specified for an operation, the SDK may also rai
 
 ```python
 from atoma_sdk import AtomaSDK, models
+import os
 
-with AtomaSDK() as atoma_sdk:
+with AtomaSDK(
+    bearer_auth=os.getenv("ATOMASDK_BEARER_AUTH", ""),
+) as atoma_sdk:
     res = None
     try:
 
@@ -239,9 +327,11 @@ with AtomaSDK() as atoma_sdk:
 The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
 from atoma_sdk import AtomaSDK
+import os
 
 with AtomaSDK(
     server_url="http://localhost:8080",
+    bearer_auth=os.getenv("ATOMASDK_BEARER_AUTH", ""),
 ) as atoma_sdk:
 
     res = atoma_sdk.health.health()
