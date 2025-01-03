@@ -12,7 +12,6 @@ from .chatcompletionchunkdelta import (
     ChatCompletionChunkDeltaTypedDict,
 )
 from .chatcompletionmessage import ChatCompletionMessage, ChatCompletionMessageTypedDict
-from .chatcompletionrequest import ChatCompletionRequest, ChatCompletionRequestTypedDict
 from .chatcompletionresponse import (
     ChatCompletionResponse,
     ChatCompletionResponseTypedDict,
@@ -22,6 +21,14 @@ from .chatcompletionstreamresponse import (
     ChatCompletionStreamResponseTypedDict,
 )
 from .completionusage import CompletionUsage, CompletionUsageTypedDict
+from .confidentialcomputerequest import (
+    ConfidentialComputeRequest,
+    ConfidentialComputeRequestTypedDict,
+)
+from .confidentialcomputeresponse import (
+    ConfidentialComputeResponse,
+    ConfidentialComputeResponseTypedDict,
+)
 from .createchatcompletionrequest import (
     CreateChatCompletionRequest,
     CreateChatCompletionRequestTypedDict,
@@ -56,6 +63,7 @@ from .selectnodepublickeyrequest import (
     SelectNodePublicKeyRequest,
     SelectNodePublicKeyRequestTypedDict,
 )
+from .usage import Usage, UsageTypedDict
 
 __all__ = [
     "APIError",
@@ -69,14 +77,16 @@ __all__ = [
     "ChatCompletionChunkTypedDict",
     "ChatCompletionMessage",
     "ChatCompletionMessageTypedDict",
-    "ChatCompletionRequest",
-    "ChatCompletionRequestTypedDict",
     "ChatCompletionResponse",
     "ChatCompletionResponseTypedDict",
     "ChatCompletionStreamResponse",
     "ChatCompletionStreamResponseTypedDict",
     "CompletionUsage",
     "CompletionUsageTypedDict",
+    "ConfidentialComputeRequest",
+    "ConfidentialComputeRequestTypedDict",
+    "ConfidentialComputeResponse",
+    "ConfidentialComputeResponseTypedDict",
     "CreateChatCompletionRequest",
     "CreateChatCompletionRequestTypedDict",
     "CreateChatCompletionStreamRequest",
@@ -107,4 +117,6 @@ __all__ = [
     "Two2",
     "Two2TypedDict",
     "TwoTypedDict",
+    "Usage",
+    "UsageTypedDict",
 ]
