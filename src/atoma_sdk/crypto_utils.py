@@ -43,7 +43,7 @@ def derive_key(shared_secret: bytes, salt: bytes) -> bytes:
             algorithm=hashes.SHA256(),
             length=32,
             salt=salt,
-            info=b"encryption-key",
+            info=b"",
         )
         return hkdf.derive(shared_secret)
     except Exception as e:
@@ -80,7 +80,8 @@ def encrypt_message(
         if not res or not res.public_key:
             raise ValueError("Failed to retrieve node public key")
         node_dh_public_key_encoded = res.public_key
-        node_dh_public_key = X25519PublicKey.from_public_bytes(node_dh_public_key_encoded)
+        node_dh_public_key_bytes = base64.b64decode(node_dh_public_key_encoded)
+        node_dh_public_key = X25519PublicKey.from_public_bytes(node_dh_public_key_bytes)
         stack_small_id = res.stack_small_id
     except Exception as e:
         raise ValueError(f"Failed to get node public key: {str(e)}") from e
