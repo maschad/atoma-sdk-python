@@ -26,11 +26,11 @@ def test_chat_completion_basic(client):
         ]
     )
 
-    print(completion.choices[0].message)
-    
+    print(completion.data.choices[0].message)
+
     assert completion is not None
-    assert len(completion.choices) > 0
-    assert completion.choices[0].message.content is not None
+    assert len(completion.data.choices) > 0
+    assert completion.data.choices[0].message.content is not None
 
 def test_chat_completion_with_system_message(client):
     completion = client.confidential_chat.create(
@@ -40,10 +40,10 @@ def test_chat_completion_with_system_message(client):
             {"role": "user", "content": "Hello!"}
         ]
     )
-    
+
     assert completion is not None
-    assert len(completion.choices) > 0
-    assert completion.choices[0].message.content is not None
+    assert len(completion.data.choices) > 0
+    assert completion.data.choices[0].message.content is not None
 
 @pytest.mark.asyncio
 async def test_chat_completion_async(client):
@@ -54,10 +54,10 @@ async def test_chat_completion_async(client):
             {"role": "user", "content": "Hello!"}
         ]
     )
-    
+
     assert completion is not None
-    assert len(completion.choices) > 0
-    assert completion.choices[0].message.content is not None
+    assert len(completion.data.choices) > 0
+    assert completion.data.choices[0].message.content is not None
 
 def test_chat_completion_stream(client):
     completion = client.confidential_chat.create_stream(
@@ -70,15 +70,15 @@ def test_chat_completion_stream(client):
 
     # Verify we get a valid stream
     assert completion is not None
-    
+
     # Process the stream and verify chunks
     chunk_count = 0
     for chunk in completion:
         assert chunk is not None
-        assert chunk is not None
-        assert len(chunk.choices) > 0
-        assert chunk.choices[0].delta is not None
+        assert chunk.data is not None
+        assert len(chunk.data.choices) > 0
+        assert chunk.data.choices[0].delta is not None
         chunk_count += 1
-    
+
     # Verify we got multiple chunks
     assert chunk_count > 0

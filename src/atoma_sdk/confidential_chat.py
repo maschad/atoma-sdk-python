@@ -173,7 +173,7 @@ class ConfidentialChat(BaseSDK):
                     encrypted_message=encrypted_response
                 )
                 return utils.unmarshal_json(
-                    decrypted_response.decode('utf-8'), 
+                    decrypted_response.decode('utf-8'),
                     models.ChatCompletionResponse
                 )
             except Exception as e:
@@ -362,7 +362,7 @@ class ConfidentialChat(BaseSDK):
                     encrypted_message=encrypted_response
                 )
                 return utils.unmarshal_json(
-                    decrypted_response.decode('utf-8'), 
+                    decrypted_response.decode('utf-8'),
                     models.ChatCompletionResponse
                 )
             except Exception as e:
@@ -554,7 +554,8 @@ class ConfidentialChat(BaseSDK):
                     # Skip chunks with empty choices
                     if not decrypted_json.get('choices'):
                         return None
-                    return models.ChatCompletionChunk.model_validate(decrypted_json)
+                    # Wrap the chunk in a StreamResponse to maintain consistent API
+                    return models.ChatCompletionStreamResponse(data=models.ChatCompletionChunk.model_validate(decrypted_json))
                 except Exception as e:
                     raise models.APIError(f"Failed to decrypt stream chunk: {str(e)}", 500, str(e), None)
 
@@ -740,7 +741,9 @@ class ConfidentialChat(BaseSDK):
                         salt=salt,
                         encrypted_message=encrypted_chunk.data
                     )
-                    return utils.unmarshal_json(decrypted_chunk.decode('utf-8'), models.ChatCompletionStreamResponse)
+                    decrypted_json = json.loads(decrypted_chunk.decode('utf-8'))
+                    # Wrap the chunk in a StreamResponse to maintain consistent API
+                    return models.ChatCompletionStreamResponse(data=models.ChatCompletionChunk.model_validate(decrypted_json))
                 except Exception as e:
                     raise models.APIError(f"Failed to decrypt stream chunk: {str(e)}", 500, str(e), None)
 
