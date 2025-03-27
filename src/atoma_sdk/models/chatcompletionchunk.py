@@ -5,6 +5,7 @@ from .chatcompletionchunkchoice import (
     ChatCompletionChunkChoice,
     ChatCompletionChunkChoiceTypedDict,
 )
+from .usage import Usage, UsageTypedDict
 from atoma_sdk.types import BaseModel
 from typing import List
 from typing_extensions import TypedDict
@@ -19,6 +20,14 @@ class ChatCompletionChunkTypedDict(TypedDict):
     r"""A unique identifier for the chat completion chunk."""
     model: str
     r"""The model used for the chat completion."""
+    id: str
+    r"""The unique identifier for the chat completion."""
+    system_fingerprint: str
+    r"""The system fingerprint for the chat completion."""
+    usage: UsageTypedDict
+    r"""The usage information for the chat completion."""
+    service_tier: str
+    r"""The service tier for the chat completion."""
 
 
 class ChatCompletionChunk(BaseModel):
@@ -33,3 +42,16 @@ class ChatCompletionChunk(BaseModel):
 
     model: str
     r"""The model used for the chat completion."""
+
+    id: str
+    r"""The unique identifier for the chat completion."""
+
+    system_fingerprint: str
+    r"""The system fingerprint for the chat completion."""
+
+    usage: Usage
+    r"""The usage information for the chat completion."""
+
+    service_tier: str
+    r"""The service tier for the chat completion."""
+
