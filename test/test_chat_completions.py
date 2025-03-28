@@ -27,7 +27,7 @@ def test_chat_completion_basic(client):
     )
 
     print(completion.choices[0].message)
-    
+
     assert completion is not None
     assert len(completion.choices) > 0
     assert completion.choices[0].message.content is not None
@@ -40,7 +40,7 @@ def test_chat_completion_with_system_message(client):
             {"role": "user", "content": "Hello!"}
         ]
     )
-    
+
     assert completion is not None
     assert len(completion.choices) > 0
     assert completion.choices[0].message.content is not None
@@ -54,7 +54,7 @@ async def test_chat_completion_async(client):
             {"role": "user", "content": "Hello!"}
         ]
     )
-    
+
     assert completion is not None
     assert len(completion.choices) > 0
     assert completion.choices[0].message.content is not None
@@ -70,7 +70,7 @@ def test_chat_completion_stream(client):
 
     # Verify we get a valid stream
     assert completion is not None
-    
+
     # Process the stream and verify chunks
     chunk_count = 0
     for chunk in completion:
@@ -78,7 +78,11 @@ def test_chat_completion_stream(client):
         assert chunk.data is not None
         assert len(chunk.data.choices) > 0
         assert chunk.data.choices[0].delta is not None
+        assert chunk.data.system_fingerprint is not None
+        assert chunk.data.usage is not None
+        assert chunk.data.service_tier is not None
         chunk_count += 1
-    
+
     # Verify we got multiple chunks
     assert chunk_count > 0
+
