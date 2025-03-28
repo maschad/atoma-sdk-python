@@ -21,6 +21,11 @@ class ChatCompletionResponseTypedDict(TypedDict):
     system_fingerprint: NotRequired[Nullable[str]]
     r"""The system fingerprint for the completion, if applicable."""
     usage: NotRequired[Nullable[CompletionUsageTypedDict]]
+    r"""The usage information for the chat completion."""
+    service_tier: NotRequired[Nullable[str]]
+    r"""The service tier for the chat completion."""
+    object: NotRequired[Nullable[str]]
+    r"""The object type for the chat completion."""
 
 
 class ChatCompletionResponse(BaseModel):
@@ -40,6 +45,13 @@ class ChatCompletionResponse(BaseModel):
     r"""The system fingerprint for the completion, if applicable."""
 
     usage: OptionalNullable[CompletionUsage] = UNSET
+    r"""The usage information for the chat completion."""
+
+    service_tier: OptionalNullable[str] = UNSET
+    r"""The service tier for the chat completion."""
+
+    object: OptionalNullable[str] = UNSET
+    r"""The object type for the chat completion."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

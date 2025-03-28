@@ -22,11 +22,11 @@ class ChatCompletionChunkTypedDict(TypedDict):
     r"""The model used for the chat completion."""
     id: str
     r"""The unique identifier for the chat completion."""
-    system_fingerprint: str
+    system_fingerprint: str | None = None
     r"""The system fingerprint for the chat completion."""
-    usage: UsageTypedDict
+    usage: UsageTypedDict | None = None
     r"""The usage information for the chat completion."""
-    service_tier: str
+    service_tier: str | None = None
     r"""The service tier for the chat completion."""
 
 
@@ -43,15 +43,12 @@ class ChatCompletionChunk(BaseModel):
     model: str
     r"""The model used for the chat completion."""
 
-    id: str
-    r"""The unique identifier for the chat completion."""
-
-    system_fingerprint: str
+    system_fingerprint: str | None = None
     r"""The system fingerprint for the chat completion."""
 
-    usage: Usage
+    usage: Usage | None = None
     r"""The usage information for the chat completion."""
 
-    service_tier: str
+    service_tier: str | None = None
     r"""The service tier for the chat completion."""
 
