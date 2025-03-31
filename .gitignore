@@ -9,3 +9,4 @@ __pycache__/
 pyrightconfig.json
 dist/
 .env
+main_test.py
