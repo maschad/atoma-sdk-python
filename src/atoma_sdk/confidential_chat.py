@@ -731,25 +731,51 @@ class ConfidentialChat(BaseSDK):
 
         if utils.match_response(http_res, "200", "text/event-stream"):
             ##################################################################################################
-            # Create a decryption wrapper function for each chunk
-            async def decrypt_chunk(raw_chunk):
+            # Fix: Create a synchronous wrapper for the async decrypt_chunk function
+            # This is needed because EventStreamAsync expects a sync function that returns the value directly
+            def decrypt_chunk_wrapper(raw_chunk):
                 try:
-                    encrypted_chunk = utils.unmarshal_json(raw_chunk, models.ConfidentialComputeResponse)
+                    # Parse the raw JSON string directly
+                    parsed_data = json.loads(raw_chunk)
+
+                    # Create a simple class to hold the encrypted data with attributes
+                    class EncryptedData:
+                        def __init__(self, ciphertext, nonce, signature, response_hash):
+                            self.ciphertext = ciphertext
+                            self.nonce = nonce
+                            self.signature = signature
+                            self.response_hash = response_hash
+
+                    # Instantiate this class with the data from the JSON
+                    encrypted_data = EncryptedData(
+                        ciphertext=parsed_data["data"]["ciphertext"],
+                        nonce=parsed_data["data"]["nonce"],
+                        signature=parsed_data["data"]["signature"],
+                        response_hash=parsed_data["data"]["response_hash"]
+                    )
+
+                    # Now pass this properly structured object to decrypt_message
                     decrypted_chunk = crypto_utils.decrypt_message(
                         client_dh_private_key=client_dh_private_key,
                         node_dh_public_key=node_dh_public_key,
                         salt=salt,
-                        encrypted_message=encrypted_chunk.data
+                        encrypted_message=encrypted_data
                     )
+
                     decrypted_json = json.loads(decrypted_chunk.decode('utf-8'))
-                    # Wrap the chunk in a StreamResponse to maintain consistent API
+
+                    # Skip chunks with empty choices
+                    if not decrypted_json.get('choices'):
+                        return None
+
+                    # Wrap the chunk in a StreamResponse
                     return models.ChatCompletionStreamResponse(data=models.ChatCompletionChunk.model_validate(decrypted_json))
                 except Exception as e:
                     raise models.APIError(f"Failed to decrypt stream chunk: {str(e)}", 500, str(e), None)
 
             return utils.eventstreaming.EventStreamAsync(
                 http_res,
-                decrypt_chunk,
+                decrypt_chunk_wrapper,
                 sentinel="[DONE]"
             )
             ##################################################################################################
