@@ -416,7 +416,7 @@ class ConfidentialChat(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> utils.eventstreaming.EventStream[models.ChatCompletionStreamResponse]:
+    ) -> utils.eventstreaming.EventStream[models.ChatCompletionsCreateStreamResponseBody]:
         r"""Create confidential chat completion with streaming
 
         This handler processes streaming chat completion requests in a confidential manner, providing additional
@@ -608,7 +608,7 @@ class ConfidentialChat(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> utils.eventstreaming.EventStreamAsync[models.ChatCompletionStreamResponse]:
+    ) -> utils.eventstreaming.EventStreamAsync[models.ChatCompletionsCreateStreamResponseBody]:
         r"""Create confidential chat completion with streaming
 
         This handler processes streaming chat completion requests in a confidential manner, providing additional
@@ -769,7 +769,7 @@ class ConfidentialChat(BaseSDK):
                         return None
 
                     # Wrap the chunk in a StreamResponse
-                    return models.ChatCompletionStreamResponse(data=models.ChatCompletionChunk.model_validate(decrypted_json))
+                    return models.ChatCompletionsCreateStreamResponseBody(data=models.ChatCompletionChunk.model_validate(decrypted_json))
                 except Exception as e:
                     raise models.APIError(f"Failed to decrypt stream chunk: {str(e)}", 500, str(e), None)
 
